@@ -8,7 +8,7 @@ import User from "./users/User";
 function Customer() {
   // const navigate = useNavigate();
   return (
-    <div style={{backgroundColor:"slategrey"}}>
+    <div>
       <div>
        <User/>
       <Outlet/>

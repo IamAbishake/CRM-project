@@ -1,4 +1,5 @@
 import CanvasJSReact from "@canvasjs/react-charts";
+
 //var CanvasJSReact = require('@canvasjs/react-charts');
 import React from "react";
 import { Component } from "react";
@@ -7,14 +8,11 @@ import { Outlet } from "react-router-dom";
 // var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-
 //Create Chart
 class Dashboard extends Component {
- 
-
   render() {
     const options1 = {
-      theme: "dark1", // "light1", "dark1", "dark2"
+      theme: "light1", // "light1", "dark1", "dark2"
       animationEnabled: true, //Change to false
       animationDuration: 1200, //Change it to 2000
       title: {
@@ -36,30 +34,32 @@ class Dashboard extends Component {
     };
 
     const options2 = {
-			theme: "dark2",
-			animationEnabled: true,
-			exportFileName: "Product Analytics",
-			exportEnabled: true,
-			title:{
-				text: "Top Categories of Items"
-			},
-			data: [{
-				type: "pie",
-				showInLegend: true,
-				legendText: "{label}",
-				toolTipContent: "{label}: <strong>{y}%</strong>",
-				indexLabel: "{y}%",
-				indexLabelPlacement: "inside",
-				dataPoints: [
-					{ y: 32, label: "Hot Drinks" },
-					{ y: 22, label: "Cool Drinks" },
-					{ y: 15, label: "Baking Items" },
-					{ y: 19, label: "Milk Products" },
-					{ y: 5, label: "Fresh Juices" },
-					{ y: 7, label: "Others" }
-				]
-			}]
-		}
+      theme: "light2",
+      animationEnabled: true,
+      exportFileName: "Product Analytics",
+      exportEnabled: true,
+      title: {
+        text: "Top Categories of Items",
+      },
+      data: [
+        {
+          type: "pie",
+          showInLegend: true,
+          legendText: "{label}",
+          toolTipContent: "{label}: <strong>{y}%</strong>",
+          indexLabel: "{y}%",
+          indexLabelPlacement: "inside",
+          dataPoints: [
+            { y: 32, label: "Hot Drinks" },
+            { y: 22, label: "Cool Drinks" },
+            { y: 15, label: "Baking Items" },
+            { y: 19, label: "Milk Products" },
+            { y: 5, label: "Fresh Juices" },
+            { y: 7, label: "Others" },
+          ],
+        },
+      ],
+    };
 
     const options3 = {
       theme: "dark1",
@@ -195,38 +195,49 @@ class Dashboard extends Component {
     };
 
     return (
-      <div className="bg-slate-500 ">
-
-				<div className=" grid grid-cols-4 pt-24 text-center ml-72">
-					<div className="h-20 w-48  bg-gray-900 text-gray-400 pt-2 text-2xl shadow-xl rounded-lg shadow-black">Total Profit <br /> 2000k</div>
-					<div className="h-20 w-48  bg-gray-900 text-gray-400 pt-2 text-2xl shadow-xl rounded-lg shadow-black">Likes <br /> 1M+</div>
-					<div className="h-20 w-48  bg-gray-900 text-gray-400 pt-2 text-2xl shadow-xl rounded-lg shadow-black">Total Sales<br />100k </div>
-					<div className="h-20 w-48  bg-gray-900 text-gray-400 pt-2 text-2xl shadow-xl rounded-lg shadow-black">New Customers<br />10k</div>
-				</div>
-
-				<div className="grid grid-cols-2 h-1/4 gap-7 mt-6 mb-14 ml-72 mr-20">
-        <div className="shadow-2xl  shadow-black"> <CanvasJSChart options={options2} />
-					</div>
-					<div className="shadow-2xl  shadow-black"><CanvasJSChart options={options1} />
-					</div>
-					
-				</div>
-
-				<div className="grid grid-cols-2 h-1/4 gap-7 ml-72 mr-20">
-				<div className="shadow-2xl shadow-black">
-						<CanvasJSChart options={options3} />
-					</div>
-					<div className="shadow-2xl shadow-black">
-						<CanvasJSChart options={options4} />
-					</div>
-          <div>
-
+      <div   className="bg-gray-100">
+        <div className=" grid grid-cols-4 pt-24 text-center ml-72">
+          <div className="h-20 w-48  bg-sky-500 text-white pt-2 text-2xl shadow-md rounded-lg shadow-black">
+            Total Profit <br /> 2000k
           </div>
-				</div>
+          <div className="h-20 w-48  bg-sky-500 text-white pt-2 text-2xl shadow-md rounded-lg shadow-black ">
+            Likes <br /> 1M+
+          </div>
+          <div className="h-20 w-48  bg-sky-500 text-white pt-2 text-2xl shadow-md rounded-lg shadow-black">
+            Total Sales
+            <br />
+            100k{" "}
+          </div>
+          <div className="h-20 w-48  bg-sky-500 text-white pt-2 text-2xl shadow-md rounded-lg shadow-black">
+            New Customers
+            <br />
+            10k
+          </div>
+        </div>
 
-				<div>
-				<Outlet />
-				</div>
+        <div className="grid grid-cols-2 h-1/4 gap-7 mt-6 mb-14 ml-72 mr-20">
+          <div className="shadow-2xl  shadow-black">
+            {" "}
+            <CanvasJSChart options={options2} />
+          </div>
+          <div className="shadow-2xl  shadow-black">
+            <CanvasJSChart options={options1} />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 h-1/4 gap-7 ml-72 mr-20">
+          <div className="shadow-2xl shadow-black">
+            <CanvasJSChart options={options3} />
+          </div>
+          <div className="shadow-2xl shadow-black">
+            <CanvasJSChart options={options4} />
+          </div>
+          <div></div>
+        </div>
+
+        <div>
+          <Outlet />
+        </div>
       </div>
     );
   }

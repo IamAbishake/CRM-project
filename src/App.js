@@ -15,8 +15,7 @@ import Updateproduct from "./Components/products/Updateproduct";
 import Updateorder from "./Components/orders/Updateorder";
 import Addorder from "./Components/orders/Addorder";
 import Orders from "./Components/orders/Orders";
-import Login from "./Components/Login";
-
+import Login from "./Components/Login"
 
 function App() {
   
@@ -41,8 +40,8 @@ function App() {
           <Route path="/Customer/Edit/:id" element={<Updateuser/>}/>
           <Route path="/Orders/Addorder" element={<Addorder/>}/>
           <Route path="/Orders/updateorder/:id" element={<Updateorder/>}/>
-          <Route path="/About" element={<About/>}></Route>
-        </Route>
+          <Route path="/About" element={<About/>}/>
+         </Route>
       </Routes>
       </BrowserRouter>
       </div>

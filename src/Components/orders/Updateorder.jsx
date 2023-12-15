@@ -52,7 +52,7 @@ function Updateorder() {
         className="px-8 h-full w-96 py-8  shadow-2xl bg-white rounded-2xl shadow-black"
         onSubmit={submitForm}
         >
-        <h1 className="font-bold text-center text-blue-600 text-3xl">Update Order</h1>
+        <h1 className="font-bold text-center text-sky-500 text-3xl">Update Order</h1>
         <div className="mb-6">
           <label
             htmlFor="customer"
@@ -130,13 +130,13 @@ function Updateorder() {
         <div className="flex gap-2 flex-row-reverse">
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white bg-sky-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Save
           </button>
           <Link
             to={"/Orders"}
-            className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="text-white bg-sky-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Back
           </Link>

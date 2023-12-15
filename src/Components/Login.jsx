@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, {  useEffect,useState } from "react";
 import { useNavigate } from "react-router-dom";
+import backgroundimages from "./images/abstract.jpg";
+import validator from "validator";
+
 const Login = () => {
   const [input, setInput] = useState({ email: "", password: "" });
-  const [errorMessage, seterrorMessage] = useState("");
+  const [errorMessage, setErrorMessage]=useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -10,59 +13,71 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("auth")) navigate("/Dashboard");
-  }, []);
+    if (localStorage.getItem("auth")) 
+    navigate("/Dashboard");
+  },[navigate]);
+  
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (input.email !== "abi@gmail.com" || input.password !== "abi") return;
-    seterrorMessage("");
-    navigate("/Dashboard");
+    if(validator.isEmpty(input.email) || validator.isEmpty(input.password))
+    return setErrorMessage("enter a email and password !")
+    
+    if (input.email !== "abi@gmail.com" || input.password !== "abi")
+    return setErrorMessage("invalid email or password !");
     localStorage.setItem("auth", true);
+       navigate("/Dashboard")      
+    }
+
+    return (
+      <div
+        style={{ backgroundImage: `url(${backgroundimages})` }}
+        className="flex justify-center bg-center bg-cover bg-no-repeat items-center w-screen h-screen "
+      >
+        <div className="flex justify-center h-96 w-72 border-none mr-28 mb-10  rounded-2xl bg-transparent shadow-lg shadow-black">
+          <form onSubmit={submitForm} className="">
+            <h1 className="text-4xl text-center text-white font-bold mt-4">
+              LOGIN
+            </h1>
+            {errorMessage.length > 0 && (
+            <small style={{ color: "red" }}>
+              {errorMessage}
+            </small>
+          )}
+            <div className="grid grid-rows-4 mt-4">
+              <label
+                htmlFor="Email"
+                className="py-2 text-xl text-white font-bold"
+              >
+                Email
+              </label>
+              <input
+                type="text"
+                name="email"
+                onChange={handleChange}
+                placeholder="Email"
+                className="py-2 px-2 text-white border-none text-sm rounded-2xl bg-transparent "
+              />
+              <label htmlFor="" className="py-2 text-xl font-bold text-white">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                placeholder="Password"
+                className="py-2 px-2 text-sm  text-white rounded-2xl bg-transparent"
+              />
+
+              <button  className="mt-14  py-2 rounded-2xl font-bold text-xl bg-white opacity-85 text-black ">
+                Login
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
   };
 
-  return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-cyan-700 to-pink-900 ">
-      <div className="flex justify-center mt-20 h-96 w-72 border-none rounded-2xl bg-transparent shadow-2xl shadow-black  ">
-        <form onSubmit={submitForm} className="">
-          <h1 className="text-4xl text-center mt-4">Login</h1>
-          {seterrorMessage > 0 ? (
-            <div style={{ marginBottom: "10px", color: "red" }}>
-             <p>invalid email or password</p>
-            </div>
-          ):("")}
-          <div className="grid grid-rows-4 mt-4">
-            <label htmlFor="Email" className="py-2">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              onChange={handleChange}
-              required
-              placeholder="Email"
-              className="py-2 px-2 text-sm rounded-2xl "
-            />
-            <label htmlFor="" className="py-2">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              onChange={handleChange}
-              required
-              placeholder="Password"
-              className="py-2 px-2 text-sm rounded-2xl  "
-            />
-
-            <button className="mt-14  py-2 rounded-2xl font-bold bg-gradient-to-r from-cyan-500 to-pink-500 hover:to-pink-700 ">
-              Login
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-};
 
 export default Login;

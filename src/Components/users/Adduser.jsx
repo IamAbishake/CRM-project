@@ -3,38 +3,74 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import validator from "validator";
 
 const Adduser = () => {
   const users = {
     fname: "",
     lname: "",
     email: "",
-    password: ""
+    password: "",
   };
+
   const [user, setUser] = useState(users);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
-  const inputHandler = (e) => {
-    const { name, value } = e.target;
-    setUser({...user, [name]:value});
+  const inputHandler = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
+  };
+
+  const submitForm = async (event) => {
+    event.preventDefault();
     
-  }
+    
+    const errors = {};
 
-  const submitForm = async(e)=>{
-    e.preventDefault();
-    await axios.post("http://localhost:8000/api/create", user)
-    .then((response)=>{
-       toast.success(response.data.msg, {position:"top-right"})
-       navigate("/Customer")
-    }).catch((error)=>{
-      console.log(error)
-    })
+    if (validator.isEmpty(user.fname)) {
+      errors.fname = "first name is required!";
+    }
 
-  }
+    if (validator.isEmpty(user.lname)) {
+      errors.lname = "last name is required!";
+    }
+
+    if (validator.isEmpty(user.email)) {
+      errors.email = "email is required!";
+    } else if (!validator.isEmail(user.email)) {
+      errors.email = "invalid email address!";
+    }
+    
+    if (validator.isEmpty(user.password)) {
+      errors.password = "password is required!";
+    } else if (!validator.isStrongPassword(user.password)) {
+      errors.password = "enter a strong password!";
+    }
+
+
+    if (Object.keys(errors).length > 0) {
+      setErrors(errors);
+    } else {
+      await axios
+        .post("http://localhost:8000/api/create", user)
+        .then((response) => {
+          toast.success(response.data.msg, { position: "top-right" });
+          navigate("/Customer");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
 
   return (
     <div className="w-full h-full mt-24  grid grid-cols-1 place-items-center ">
-      <form onSubmit={submitForm} className="px-8 h-full w-96 py-8  shadow-2xl bg-white rounded-2xl shadow-black">
+      <form
+        onSubmit={submitForm}
+        className="px-8 h-full w-96 py-8  shadow-2xl bg-white rounded-2xl shadow-black"
+      >
         <div className="mb-6">
           <h1 className="text-center  font-bold text-3xl">ADD USER</h1>
           <label
@@ -43,17 +79,20 @@ const Adduser = () => {
           >
             First Name
           </label>
+          {errors.fname && (
+            <small style={{ color: "red", marginLeft: "10px" }}>
+              {errors.fname}
+            </small>
+          )}
           <input
             type="text"
             id="fname"
             name="fname"
+            value={user.fname}
             onChange={inputHandler}
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-             focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-             dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5"
             placeholder="First Name"
-            required
-            />
+          />
         </div>
         <div className="mb-6">
           <label
@@ -62,17 +101,22 @@ const Adduser = () => {
           >
             Last Name
           </label>
+          {errors.lname && (
+            <small style={{ color: "red", marginLeft: "10px" }}>
+              {errors.lname}
+            </small>
+          )}
           <input
             type="text"
             id="lname"
             name="lname"
+            value={user.lname}
             onChange={inputHandler}
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
              focus:border-blue-500  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
               dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Last Name"
-            required
-            />
+          />
         </div>
 
         <div className="mb-6">
@@ -82,17 +126,23 @@ const Adduser = () => {
           >
             Email
           </label>
+          {errors.email && (
+            <small style={{ color: "red", marginLeft: "10px" }}>
+              {errors.email}
+            </small>
+          )}
+
           <input
-            type="email"
+            type="text"
             id="email"
             name="email"
+            value={user.email}
             onChange={inputHandler}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
              focus:border-blue-500  w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
               dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Your Email"
-            required
-            />
+          />
         </div>
         <div className="mb-6">
           <label
@@ -101,22 +151,27 @@ const Adduser = () => {
           >
             Password
           </label>
+          {errors.password && (
+            <small style={{ color: "red", marginLeft: "10px" }}>
+              {errors.password}
+            </small>
+          )}
           <input
             type="password"
             id="password"
             name="password"
+            value={user.password}
             onChange={inputHandler}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500
              focus:border-blue-500 w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
               dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Password"
-            required
-            />
+          />
         </div>
         <div className="flex gap-2 flex-row-reverse">
-          <button 
+          <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
+            className="text-white bg-sky-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300
              font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600
               dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
@@ -124,7 +179,7 @@ const Adduser = () => {
           </button>
           <Link
             to={"/Customer"}
-            className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
+            className="text-white bg-sky-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 
             font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700
              dark:focus:ring-blue-800"
           >
