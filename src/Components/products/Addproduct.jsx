@@ -44,7 +44,7 @@ const Addproduct = () => {
     }
      else {
     await axios
-      .post("https://crm-backend-wyng.onrender.com/api/createproduct", product)
+      .post("https://crm-mernapp.onrender.com/api/createproduct", product)
       .then((response) => {
         toast.success(response.data.msg, { position: "top-right" });
         navigate("/Product");

@@ -24,7 +24,7 @@ const users ={
   
 }
 useEffect(()=>{
-  axios.get(`https://crm-backend-wyng.onrender.com/api/getOne/${id}`)
+  axios.get(`https://crm-mernapp.onrender.com/api/getOne/${id}`)
   .then((response)=>{
     setUser(response.data) 
   })
@@ -35,7 +35,7 @@ useEffect(()=>{
 
 const submitForm=async(e)=>{
   e.preventDefault();
-    await axios.put(`https://crm-backend-wyng.onrender.com/api/update/${id}`, user)
+    await axios.put(`https://crm-mernapp.onrender.com/api/update/${id}`, user)
     .then((response)=>{
       toast.success(response.data.msg, {position:"top-right"})
        navigate("/Customer")

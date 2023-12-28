@@ -26,7 +26,7 @@ const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://crm-backend-wyng.onrender.com/api/getall");
+        const response = await axios.get("https://crm-mernapp.onrender.com/api/getall");
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -73,7 +73,7 @@ const User = () => {
   const deleteUser = async (userId) => {
     try {
       const response = await axios.delete(
-        `https://crm-backend-wyng.onrender.com/api/delete/${userId}`
+        `https://crm-mernapp.onrender.com/api/delete/${userId}`
       );
       setUsers((prevUser) => prevUser.filter((user) => user._id !== userId));
       toast.success(response.data.msg, { position: "top-right" });

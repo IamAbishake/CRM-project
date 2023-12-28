@@ -26,7 +26,7 @@ function Updateproduct() {
         
       }
       useEffect(()=>{
-        axios.get(`https://crm-backend-wyng.onrender.com/api/getOneproduct/${id}`)
+        axios.get(`https://crm-mernapp.onrender.com/api/getOneproduct/${id}`)
         .then((response)=>{
           setProducts(response.data) 
         })
@@ -37,7 +37,7 @@ function Updateproduct() {
       
       const submitForm=async(e)=>{
         e.preventDefault();
-          await axios.put(`https://crm-backend-wyng.onrender.com/api/updateproduct/${id}`, product)
+          await axios.put(`https://crm-mernapp.onrender.com/api/updateproduct/${id}`, product)
           .then((response)=>{
             toast.success(response.data.msg, {position:"top-right"})
              navigate("/Product")

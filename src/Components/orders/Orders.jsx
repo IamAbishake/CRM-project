@@ -26,7 +26,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-      const response = await axios.get("https://crm-backend-wyng.onrender.com/api/getallorder");
+      const response = await axios.get("https://crm-mernapp.onrender.com/api/getallorder");
       setOrders(response.data);
       } catch (error){
         console.error("error fetching data", error);
@@ -73,7 +73,7 @@ const Orders = () => {
     if (selectedOrderId) {
       try {
         const response = await axios.delete(
-          `https://crm-backend-wyng.onrender.com/api/deleteorder/${selectedOrderId}`
+          `https://crm-mernapp.onrender.com/api/deleteorder/${selectedOrderId}`
         );
         setOrders((prevOrders) =>
           prevOrders.filter((order) => order._id !== selectedOrderId)

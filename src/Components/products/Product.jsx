@@ -27,7 +27,7 @@ const Product = () => {
     const fetchData = async () => {
       try {
       const response = await axios.get(
-        "https://crm-backend-wyng.onrender.com/api/getallproduct"
+        "https://crm-mernapp.onrender.com/api/getallproduct"
       );
       setProducts(response.data);
     } catch (error){
@@ -76,7 +76,7 @@ const Product = () => {
     if (selectedProductId) {
       try {
         const response = await axios.delete(
-          `https://crm-backend-wyng.onrender.com/api/deleteproduct/${selectedProductId}`
+          `https://crm-mernapp.onrender.com/api/deleteproduct/${selectedProductId}`
         );
         setProducts((prevProducts) =>
           prevProducts.filter((product) => product._id !== selectedProductId)

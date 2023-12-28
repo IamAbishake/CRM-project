@@ -23,7 +23,7 @@ const Addorder = () => {
 
   const submitForm = async(e)=>{
     e.preventDefault();
-    await axios.post("https://crm-backend-wyng.onrender.com/api/createorder", order)
+    await axios.post("https://crm-mernapp.onrender.com/api/createorder", order)
     .then((response)=>{
        toast.success(response.data.msg, {position:"top-right"})
        navigate("/Orders")
