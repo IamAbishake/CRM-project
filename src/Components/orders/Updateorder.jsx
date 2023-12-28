@@ -24,7 +24,7 @@ function Updateorder() {
   };
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/getOneorder/${id}`)
+      .get(`https://crm-backend-wyng.onrender.com/api/getOneorder/${id}`)
       .then((response) => {
         setOrders(response.data);
       })
@@ -36,7 +36,7 @@ function Updateorder() {
   const submitForm = async (e) => {
     e.preventDefault();
     await axios
-      .put(`http://localhost:8000/api/updateorder/${id}`, order)
+      .put(`https://crm-backend-wyng.onrender.com/api/updateorder/${id}`, order)
       .then((response) => {
         toast.success(response.data.msg, { position: "top-right" });
         navigate("/Orders");

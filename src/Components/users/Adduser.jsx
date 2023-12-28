@@ -54,7 +54,7 @@ const Adduser = () => {
       setErrors(errors);
     } else {
       await axios
-        .post("http://localhost:8000/api/create", user)
+        .post("https://crm-backend-wyng.onrender.com/api/create", user)
         .then((response) => {
           toast.success(response.data.msg, { position: "top-right" });
           navigate("/Customer");

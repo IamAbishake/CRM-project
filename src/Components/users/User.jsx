@@ -26,7 +26,7 @@ const User = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/getall");
+        const response = await axios.get("https://crm-backend-wyng.onrender.com/api/getall");
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -73,7 +73,7 @@ const User = () => {
   const deleteUser = async (userId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8000/api/delete/${userId}`
+        `https://crm-backend-wyng.onrender.com/api/delete/${userId}`
       );
       setUsers((prevUser) => prevUser.filter((user) => user._id !== userId));
       toast.success(response.data.msg, { position: "top-right" });
@@ -236,116 +236,3 @@ export default User;
 
 
 
-
-// import React, { useEffect, useState } from "react";
-// import { Link, Outlet } from "react-router-dom";
-// import { FaRegEdit } from "react-icons/fa";
-// import { MdDelete } from "react-icons/md";
-// import toast from "react-hot-toast";
-// import axios from "axios";
-
-// const User = () => {
-//   const [users, setUsers] = useState([]);
-
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get("http://localhost:8000/api/getall");
-//         setUsers(response.data);
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
-//     fetchData();
-//   }, []);
-
-//   const deleteUser = async (userId) => {
-//     try {
-//       const response = await axios.delete(
-//         `http://localhost:8000/api/delete/${userId}`
-//       );
-//       setUsers((prevUser) => prevUser.filter((user) => user._id !== userId));
-//       toast.success(response.data.msg, { position: "top-right" });
-//     } catch (error) {
-//       console.error("error deleting user:", error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <div className=" w-3/4 h-3/4 mb-10 mt-28 border-none ml-72 rounded-lg">
-//         <div>
-//           <div className="mt-8 ml-4">
-//             <Link
-//               className="text-white bg-sky-500 hover:bg-sky-700 shadow-lg shadow-black ml-28 focus:outline-none
-//                 focus:ring-sky-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-//               to={"/Customer/Adduser"}
-//             >
-//               ADD USER +
-//             </Link>
-//           </div>
-//           <div>
-//             {users.length > 0 ? (
-//               <div className="flex ml-28 justify-center w-3/4 ">
-//                 <table
-//                   className="w-5/6 text-base mt-10 ml-10 rounded-3xl mr-2 mb-10 min-w-full text-left shadow-2xl shadow-black
-//                   text-gray-500 dark:text-gray-400"
-//                 >
-//                   <thead className=" text-white uppercase whitespace-nowrap bg-sky-500 border-b ">
-//                     <tr className="text-base">
-//                       <th className="px-6 py-3 ">S.NO</th>
-//                       <th className="px-6 py-3 ">User Name</th>
-//                       <th className="px-6 py-3 ">Email</th>
-//                       <th className="px-6 py-3 ">Actions</th>
-//                     </tr>
-//                   </thead>
-//                   <tbody className="text-black">
-//                     {users.map((user, index) => {
-//                       return (
-//                         <tr
-//                           className="border-b-2 odd:bg-white even:bg-gray-200 whitespace-nowrap dark:border-gray-800"
-//                           key={user._id}
-//                         >
-//                           <td className="whitespace-nowrap px-6 py-4">
-//                             {index + 1}.
-//                           </td>
-//                           <td className="whitespace-nowrap px-6 py-4">
-//                             {user.fname} {user.lname}
-//                           </td>
-//                           <td className="whitespace-nowrap px-6 py-4">
-//                             {user.email}
-//                           </td>
-//                           <td className="flex ml-2 justify-around">
-//                             <Link
-//                               className=""
-//                               to={`/Customer/edit/` + user._id}
-//                             >
-//                               <FaRegEdit className="text-green-800 mt-2 mr-8 h-8 w-6" />
-//                             </Link>
-//                             <button onClick={() => deleteUser(user._id)}>
-//                               <MdDelete className=" text-red-600 mt-2 mr-8 h-8 w-8" />
-//                             </button>
-//                           </td>
-//                         </tr>
-//                       );
-//                     })}
-//                   </tbody>
-                 
-//                 </table>
-//               </div>
-//             ) : (
-//               <div className="w-3/4 mt-20 ml-32 font-bold flex justify-center rounded place-items-center text-white text-3xl h-20 bg-sky-950 ">
-//                 <p>No Users</p>
-//               </div>
-//             )}
-//           </div>
-
-//           <Outlet />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default User;
