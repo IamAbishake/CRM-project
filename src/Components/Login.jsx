@@ -23,7 +23,7 @@ const Login = () => {
     if(validator.isEmpty(input.email) || validator.isEmpty(input.password))
     return setErrorMessage("enter a email and password !")
     
-    if (input.email !== "abi@gmail.com" || input.password !== "abis")
+    if (input.email !== "abi@gmail.com" || input.password !== "abi")
     return setErrorMessage("invalid email or password !");
     localStorage.setItem("auth", true);
        navigate("/Dashboard")      
